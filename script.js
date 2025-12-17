@@ -1,4 +1,4 @@
-let coffeeGrams = 17;
+let coffeeGrams = 20;
 let americanoWater = 250;
 let machineWater = 60;
 let capuchinos;
@@ -7,15 +7,51 @@ let total;
 let cup = "";
 let amount;
 
-if (cup == "americano"){
-    let water = 250;
-    let coffeeGrams = 17;
+function calculateTotalResources(cup, numberOfCoffees){
+
+    if (cup === "americano"){
+        let water = 250;
+        let coffeeGrams = 18;
+        let machineWater = 30;
+
+        return{
+        water : water * numberOfCoffees,
+        totalCoffeeGrams : coffeeGrams * numberOfCoffees,
+        totalMachineWater : machineWater * numberOfCoffees,
+        totalWater : water + (machineWater * numberOfCoffees)
+        }
+    }
+
+    else if (cup === "capuchino"){
+        let milk = 250;
+        let coffeeGrams = 18;
+        let machineWater = 30;
+
+        return{
+        totalMilk : milk * numberOfCoffees,
+        totalCoffeeGrams : coffeeGrams * numberOfCoffees,
+        totalMachineWater : machineWater * numberOfCoffees
+        }
+    }
+
+    else{
+        throw new Error("Coffee type invalid")
+    }
+
 }
 
-if (cup == "capuchino"){
-    let milk = 250;
-    let coffeeGrams = 17;
-}
+let capuchinoResults = calculateTotalResources("capuchino", 2);
+
+console.log(`Total Milk is ${capuchinoResults.totalMilk}ml`)
+console.log(`Total Coffee Grams is ${capuchinoResults.totalCoffeeGrams}g`)
+console.log(`Total Machine Water is ${capuchinoResults.totalMachineWater}ml`)
+
+let americanoResults = calculateTotalResources("americano", 2);
+
+console.log(`Total water is ${americanoResults.water}ml`)
+console.log(`Total Coffee Grams is ${americanoResults.totalCoffeeGrams}g`)
+console.log(`Total Machine Water is ${americanoResults.totalMachineWater}ml`)
+console.log(`Total Water is ${americanoResults.totalWater}ml`)
 
 function calculateResources(numberOfCoffees){
     const totalGrams = numberOfCoffees * coffeeGrams;
