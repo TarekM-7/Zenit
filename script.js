@@ -16,6 +16,14 @@ window.onload = function(){
     console.log(amount);
     let coffeeResults = calculateTotalResources(coffee, amount);
 
+    document.getElementById("total-milk").textContent = coffeeResults.totalMilk;
+    document.getElementById("total-coffees").textContent = coffeeResults.numberOfCoffees;
+    document.getElementById("coffee-type").textContent = coffeeResults.coffeeType;
+    document.getElementById("total-coffee-grams").textContent = coffeeResults.totalCoffeeGrams;
+    document.getElementById("total-machine-water").textContent = coffeeResults.totalMachineWater;
+    document.getElementById("total-coffee-water").textContent = coffeeResults.water;
+    document.getElementById("total-water").textContent = coffeeResults.totalWater;
+
     console.log(`Total Milk is ${coffeeResults.totalMilk}ml for ${coffeeResults.numberOfCoffees} ${coffeeResults.coffeeType}s`)
     console.log(`Total Coffee Grams is ${coffeeResults.totalCoffeeGrams}g`)
     console.log(`Total Machine Water is ${coffeeResults.totalMachineWater}ml`)
@@ -27,85 +35,38 @@ window.onload = function(){
 
 function calculateTotalResources(cup, numberOfCoffees){
     
-    let coffeeGrams = 18;
-    let machineWater = 100;
-
+    const coffeeGrams = 18;
+    const machineWater = 100;
+    let milk;
+    let water;
 
     if (cup === "americano"){
-        let milk = 0;
-        let water = 250;
-
-        return{
-        totalMilk : milk * numberOfCoffees,
-        water : water * numberOfCoffees,
-        totalCoffeeGrams : coffeeGrams * numberOfCoffees,
-        totalMachineWater : machineWater * numberOfCoffees,
-        totalWater : water + (machineWater * numberOfCoffees),
-        coffeeType : cup,
-        numberOfCoffees
-    }
-        
+        milk = 0;
+        water = 250;   
     }
 
     else if (cup === "capuchino"){
-        let milk = 250;
-        let water = 0;
-
-        return{
-        totalMilk : milk * numberOfCoffees,
-        water : water * numberOfCoffees,
-        totalCoffeeGrams : coffeeGrams * numberOfCoffees,
-        totalMachineWater : machineWater * numberOfCoffees,
-        totalWater : water + (machineWater * numberOfCoffees),
-        coffeeType : cup,
-        numberOfCoffees
-    }
-
+        milk = 250;
+        water = 0;
     }
 
     else{
         throw new Error("Coffee type invalid")
     }
 
+    return{
+        totalMilk : milk * numberOfCoffees,
+        water : water * numberOfCoffees,
+        totalCoffeeGrams : coffeeGrams * numberOfCoffees,
+        totalMachineWater : machineWater * numberOfCoffees,
+        totalWater : (water + machineWater) * numberOfCoffees,
+        coffeeType : cup,
+        numberOfCoffees
+    }
 
 }
 
 /*
-let capuchinoResults = calculateTotalResources("capuchino", 2);
-
-console.log(`Total Milk is ${capuchinoResults.totalMilk}ml for ${capuchinoResults.numberOfCoffees} ${capuchinoResults.coffeeType}s`)
-console.log(`Total Coffee Grams is ${capuchinoResults.totalCoffeeGrams}g`)
-console.log(`Total Machine Water is ${capuchinoResults.totalMachineWater}ml`)
-
-let americanoResults = calculateTotalResources("americano", 2);
-
-console.log(`Total water is ${americanoResults.water}ml for ${americanoResults.numberOfCoffees} ${americanoResults.coffeeType}s`)
-console.log(`Total Coffee Grams is ${americanoResults.totalCoffeeGrams}g`)
-console.log(`Total Machine Water is ${americanoResults.totalMachineWater}ml`)
-console.log(`Total Water is ${americanoResults.totalWater}ml`)
-
-function calculateResources(numberOfCoffees){
-    const totalGrams = numberOfCoffees * coffeeGrams;
-    americanoWater = numberOfCoffees * americanoWater;
-    machineWater = numberOfCoffees * machineWater;
-    const totalWater = machineWater + americanoWater;
-
-    return{
-        americanoWater: americanoWater,
-        machineWater: machineWater,
-        number: numberOfCoffees,
-        coffe: totalGrams,
-        water: totalWater
-    };
-}
-
-const result = calculateResources(12);
-
-console.log(`For ${result.number} americano Coffees we need a total of:`);
-console.log(`${result.coffe}g of coffee`);
-console.log(`${result.machineWater}ml of water from the machine`);
-console.log(`${result.americanoWater}ml of americano water`);
-console.log(`${result.water}ml of total water`);
 
 function calculateTotalCoffes(availableGrams, availableWater){
     const totalCoffes = availableGrams/coffeeGrams;
