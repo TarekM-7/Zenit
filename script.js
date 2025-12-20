@@ -11,49 +11,62 @@ window.onload = function(){
 
     document.getElementById("submit").onclick = function(){
     coffee = document.getElementById("coffee-select").value;
-    console.log(coffee)
-    let coffeeResults = calculateTotalResources(coffee, 2);
+    amount = document.getElementById("amount").value;
+    console.log(coffee);
+    console.log(amount);
+    let coffeeResults = calculateTotalResources(coffee, amount);
 
     console.log(`Total Milk is ${coffeeResults.totalMilk}ml for ${coffeeResults.numberOfCoffees} ${coffeeResults.coffeeType}s`)
     console.log(`Total Coffee Grams is ${coffeeResults.totalCoffeeGrams}g`)
     console.log(`Total Machine Water is ${coffeeResults.totalMachineWater}ml`)
+    console.log(`Total Coffee Water is ${coffeeResults.water}ml`)
+    console.log(`Total Water is ${coffeeResults.totalWater}ml`)
+    console.log("-----");
     }
 }
 
 function calculateTotalResources(cup, numberOfCoffees){
+    
+    let coffeeGrams = 18;
+    let machineWater = 100;
+
 
     if (cup === "americano"){
+        let milk = 0;
         let water = 250;
-        let coffeeGrams = 18;
-        let machineWater = 30;
 
         return{
+        totalMilk : milk * numberOfCoffees,
         water : water * numberOfCoffees,
         totalCoffeeGrams : coffeeGrams * numberOfCoffees,
         totalMachineWater : machineWater * numberOfCoffees,
         totalWater : water + (machineWater * numberOfCoffees),
         coffeeType : cup,
         numberOfCoffees
-        }
+    }
+        
     }
 
     else if (cup === "capuchino"){
         let milk = 250;
-        let coffeeGrams = 18;
-        let machineWater = 30;
+        let water = 0;
 
         return{
         totalMilk : milk * numberOfCoffees,
+        water : water * numberOfCoffees,
         totalCoffeeGrams : coffeeGrams * numberOfCoffees,
         totalMachineWater : machineWater * numberOfCoffees,
+        totalWater : water + (machineWater * numberOfCoffees),
         coffeeType : cup,
         numberOfCoffees
-        }
+    }
+
     }
 
     else{
         throw new Error("Coffee type invalid")
     }
+
 
 }
 
