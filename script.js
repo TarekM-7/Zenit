@@ -4,8 +4,21 @@ let machineWater = 60;
 let capuchinos;
 let total;
 
-let cup = "";
-let amount;
+
+window.onload = function(){
+    let coffee;
+    let amount;
+
+    document.getElementById("submit").onclick = function(){
+    coffee = document.getElementById("coffee-select").value;
+    console.log(coffee)
+    let coffeeResults = calculateTotalResources(coffee, 2);
+
+    console.log(`Total Milk is ${coffeeResults.totalMilk}ml for ${coffeeResults.numberOfCoffees} ${coffeeResults.coffeeType}s`)
+    console.log(`Total Coffee Grams is ${coffeeResults.totalCoffeeGrams}g`)
+    console.log(`Total Machine Water is ${coffeeResults.totalMachineWater}ml`)
+    }
+}
 
 function calculateTotalResources(cup, numberOfCoffees){
 
@@ -18,7 +31,9 @@ function calculateTotalResources(cup, numberOfCoffees){
         water : water * numberOfCoffees,
         totalCoffeeGrams : coffeeGrams * numberOfCoffees,
         totalMachineWater : machineWater * numberOfCoffees,
-        totalWater : water + (machineWater * numberOfCoffees)
+        totalWater : water + (machineWater * numberOfCoffees),
+        coffeeType : cup,
+        numberOfCoffees
         }
     }
 
@@ -30,7 +45,9 @@ function calculateTotalResources(cup, numberOfCoffees){
         return{
         totalMilk : milk * numberOfCoffees,
         totalCoffeeGrams : coffeeGrams * numberOfCoffees,
-        totalMachineWater : machineWater * numberOfCoffees
+        totalMachineWater : machineWater * numberOfCoffees,
+        coffeeType : cup,
+        numberOfCoffees
         }
     }
 
@@ -40,15 +57,16 @@ function calculateTotalResources(cup, numberOfCoffees){
 
 }
 
+/*
 let capuchinoResults = calculateTotalResources("capuchino", 2);
 
-console.log(`Total Milk is ${capuchinoResults.totalMilk}ml`)
+console.log(`Total Milk is ${capuchinoResults.totalMilk}ml for ${capuchinoResults.numberOfCoffees} ${capuchinoResults.coffeeType}s`)
 console.log(`Total Coffee Grams is ${capuchinoResults.totalCoffeeGrams}g`)
 console.log(`Total Machine Water is ${capuchinoResults.totalMachineWater}ml`)
 
 let americanoResults = calculateTotalResources("americano", 2);
 
-console.log(`Total water is ${americanoResults.water}ml`)
+console.log(`Total water is ${americanoResults.water}ml for ${americanoResults.numberOfCoffees} ${americanoResults.coffeeType}s`)
 console.log(`Total Coffee Grams is ${americanoResults.totalCoffeeGrams}g`)
 console.log(`Total Machine Water is ${americanoResults.totalMachineWater}ml`)
 console.log(`Total Water is ${americanoResults.totalWater}ml`)
@@ -88,3 +106,4 @@ function calculateTotalCoffes(availableGrams, availableWater){
 let coffeResult = calculateTotalCoffes(1000,0);
 
 console.log(`With ${coffeResult.grams}g of coffee, you can make a total of ${coffeResult.coffes.toFixed(2)} coffees.`);
+*/
