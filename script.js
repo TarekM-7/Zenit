@@ -3,12 +3,15 @@ let invWater = 10000;
 let invMilk = 10000;
 
 window.onload = function(){
-    let coffee;
-    let amount;
+
+    // document.getElementById("inv-submit").onclick = function(){
+    //     let invWater = document.getElementById("inv-water").value;
+    //     console.log(`Water in inventory: ${invWater}`)
+    // }
 
     document.getElementById("submit").onclick = function(){
-        coffee = document.getElementById("coffee-select").value;
-        amount = document.getElementById("amount").value;
+        let coffee = document.getElementById("coffee-select").value;
+        let amount = document.getElementById("amount").value;
         console.log(coffee);
         console.log(amount);
         let coffeeResults = calculateTotalResources(coffee, amount);
