@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Zenit - Inventory</title>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -15,6 +15,17 @@
     </header>
     <main>
       <h1>Zenit</h1>
+      <p>
+        <label for="inv_water"
+          >Please Enter the Total Water in Inventory:</label
+        >
+        <input type="number" id="inv_water" />
+      </p>
+      <p>
+        <label for="inv_milk">Please Enter the Total Milk in Inventory:</label>
+        <input type="number" id="inv_milk" />
+      </p>
+      <button id="inv_submit">Submit</button>
     </main>
   </body>
 </html>

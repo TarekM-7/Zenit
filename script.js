@@ -1,20 +1,33 @@
+const submitBtn = document.getElementById("submit");
+const invsubmitBtn = document.getElementById("inv_submit");
 
-let invWater = 10000;
-let invMilk = 10000;
 
-window.onload = function(){
 
-    // document.getElementById("inv-submit").onclick = function(){
-    //     let invWater = document.getElementById("inv-water").value;
-    //     console.log(`Water in inventory: ${invWater}`)
-    // }
 
-    document.getElementById("submit").onclick = function(){
-        let coffee = document.getElementById("coffee-select").value;
-        let amount = document.getElementById("amount").value;
+if (invsubmitBtn){
+    invsubmitBtn.onclick = function(){
+
+        const invWater = Number(document.getElementById("inv_water").value);
+        const invMilk = Number(document.getElementById("inv_milk").value);
+
+        localStorage.setItem("invWater", invWater);
+        localStorage.setItem("invMilk", invMilk);
+
+        console.log(`Inventory Saved`);
+
+    }
+}
+
+if (submitBtn){
+    submitBtn.onclick = function(){
+
+        const coffee = document.getElementById("coffee-select").value;
+        const amount = Number(document.getElementById("amount").value);
+
         console.log(coffee);
         console.log(amount);
-        let coffeeResults = calculateTotalResources(coffee, amount);
+
+        const coffeeResults = calculateTotalResources(coffee, amount);
 
         document.getElementById("total-milk").textContent = coffeeResults.totalMilk;
         document.getElementById("total-coffees").textContent = coffeeResults.numberOfCoffees;
@@ -33,13 +46,15 @@ window.onload = function(){
 
         let leftResources = calculateLeftResources(coffeeResults.totalWater, coffeeResults.totalMilk)
 
-        document.getElementById("water-left").textContent = leftResources.invWater;
-        document.getElementById("milk-left").textContent = leftResources.invMilk;
+        document.getElementById("water-left").textContent = leftResources.newInvWater;
+        document.getElementById("milk-left").textContent = leftResources.newInvMilk;
 
-        console.log(`${leftResources.invWater}ml of Water left.`);
-        console.log(`${leftResources.invMilk}ml of Milk left.`);
+        console.log(`${leftResources.newInvMilk}ml of Milk left.`);
+        console.log(`${leftResources.newInvWater}ml of Water left.`);
     }
 }
+
+
 
 function calculateTotalResources(cup, numberOfCoffees){
     
@@ -76,12 +91,18 @@ function calculateTotalResources(cup, numberOfCoffees){
 
 function calculateLeftResources(water, milk){
 
-    invWater -= water;
-    invMilk -= milk;
+    const invWater = Number(localStorage.getItem("invWater")) || 0;
+    const invMilk = Number(localStorage.getItem("invMilk")) || 0;
+
+    const newInvWater = invWater - water;
+    const newInvMilk = invMilk - milk;
+
+    localStorage.setItem("invWater", newInvWater);
+    localStorage.setItem("invMilk", newInvMilk);
 
     return{
-        invWater,
-        invMilk
+        newInvWater,
+        newInvMilk
     }
 }
 
